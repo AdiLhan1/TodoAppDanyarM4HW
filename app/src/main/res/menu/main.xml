@@ -15,6 +15,12 @@
         android:title="Edit text size"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/action_sign_out"
+        android:title="Sign_out"
+        app:showAsAction="never"/>
+
+
 
 
 </menu>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -38,15 +39,17 @@ public class HomeFragment extends Fragment {
 
     private WorkAdapter adapter;
     private ArrayList<Work> list;
+    Button btnSubmit;
 
 
     private HomeViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        btnSubmit=view.findViewById(R.id.btnSubmit);
+        return view;
 
-
-        return inflater.inflate(R.layout.fragment_home, container, false);
 
     }
 
@@ -62,7 +65,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void itemClick(int position) {
                 Work work = list.get(position);
-                Intent intent = new Intent(getContext(),FormActivity.class);
+                Intent intent = new Intent(getContext(), FormActivity.class);
                 intent.putExtra("work", work);
                 startActivity(intent);
 
@@ -85,9 +88,6 @@ public class HomeFragment extends Fragment {
                         App.getDatabase().workDao().delete(list.get(position));
                     }
                 }).show();
-
-
-
 
 
             }

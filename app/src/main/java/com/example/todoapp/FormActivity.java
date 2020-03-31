@@ -1,5 +1,6 @@
 package com.example.todoapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +10,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.todoapp.model.Work;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+
+import java.util.HashMap;
+import java.util.Map;////
 
 public class FormActivity extends AppCompatActivity {
 
@@ -45,10 +54,29 @@ public class FormActivity extends AppCompatActivity {
         }else {
             myWork = new Work(title,desc);
             App.getDatabase().workDao().insert(myWork);
+            saveToFirestore(work);
         }
         finish();
 
     }
+
+    private void saveToFirestore(Work work) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("title", work.getTitle());
+        map.put("desc", work.getDescription());
+        FirebaseFirestore.getInstance().collection("work").add(work)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(FormActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                });
+
+  }
 
     public void edit(){
         myWork = (Work) getIntent().getSerializableExtra("work");

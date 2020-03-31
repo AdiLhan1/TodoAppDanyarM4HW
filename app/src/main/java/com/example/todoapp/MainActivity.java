@@ -1,6 +1,7 @@
 package com.example.todoapp;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,6 +18,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -32,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.File;
@@ -44,7 +47,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends AppCompatActivity {
 
     private int RequestCode = 200;
-
     private float size;
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             return;
 
                     }
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+       if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             startActivity(new Intent(this, PhoneActivity.class));
             finish();
             return;
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 //        editText.setTextSize(size);
+
     }
 
     private void goToOtherActivity() {
@@ -149,7 +152,28 @@ public class MainActivity extends AppCompatActivity {
                 Prefs.getInstance(this).Clear();
                 break;
             case R.id.action_text_size:
+                FirebaseAuth.getInstance().signOut();
                 startActivityForResult(new Intent(MainActivity.this, SizeActivity.class), RequestCode);
+            case R.id.action_sign_out:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Sign Out")
+                        .setMessage("Do you want to sign out?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseAuth.getInstance().signOut();
+                                startActivity(new  Intent(getApplicationContext(), PhoneActivity.class));
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                }
+
+                });
+                builder.create().show();
+
+
         }
         return super.onOptionsItemSelected(item);
     }

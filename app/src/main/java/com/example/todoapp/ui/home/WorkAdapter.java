@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,11 +62,13 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder>{
 
         private TextView textTitle;
         private TextView textDesc;
+        private ImageView imageView;
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitle);
             textDesc = itemView.findViewById(R.id.textDesc);
+            imageView = itemView.findViewById(R.id.image_view);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

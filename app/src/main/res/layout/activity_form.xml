@@ -12,7 +12,8 @@
         style="@style/EditTextStyle"
         android:id="@+id/editTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Title"/>
 
     <EditText
         android:id="@+id/editDesk"
