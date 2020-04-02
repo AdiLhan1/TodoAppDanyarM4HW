@@ -1,78 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#E1BEE7"
+    android:orientation="vertical"
     android:padding="16dp"
     tools:context=".PhoneActivity">
 
-<LinearLayout
-    android:id="@+id/second_screen"
-    android:visibility="invisible"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <EditText
-        android:id="@+id/editCode"
-        style="@style/EditTextStyle"
-        android:hint="Enter SMS Code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/btn_OK"
-        android:onClick="onCodeClick"
+    <LinearLayout
+        android:id="@+id/second_screen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="OK"
-        />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:visibility="invisible">
+
+        <EditText
+            android:id="@+id/editCode"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter SMS Code" />
+
+        <Button
+            android:id="@+id/btn_OK"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onCodeClick"
+            android:text="OK"
+            android:textColor="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/first_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editPhone"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your number"
+            android:inputType="phone" />
+
+        <Button
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button"
+            android:onClick="onClickContinue"
+            android:text="Continue"
+            android:textColor="#fff" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_timer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center_horizontal"/>
-
-
-
-
-
-
-</LinearLayout>
-
-   <LinearLayout
-       android:orientation="vertical"
-       android:id="@+id/first_screen"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-
-       <EditText
-           android:id="@+id/editPhone"
-           style="@style/EditTextStyle"
-           android:inputType="phone"
-           android:hint="Enter your number"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"/>
-
-       <Button
-           android:background="@drawable/bg_button"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textColor="#fff"
-           android:text="Continue"
-           style="@style/EditTextStyle"
-           android:onClick="onClickContinue"/>
-
-
-
-   </LinearLayout>
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
 

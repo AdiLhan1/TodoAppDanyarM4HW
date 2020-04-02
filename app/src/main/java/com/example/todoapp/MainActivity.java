@@ -4,38 +4,29 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.example.todoapp.ui.OnBoard.BoardFragment;
-import com.example.todoapp.ui.OnBoard.OnBoardActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.os.Environment;
 import android.util.Log;
-import android.view.MenuInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.todoapp.ui.OnBoard.OnBoardActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-import android.widget.Button;
-import android.widget.EditText;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -63,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
 
-                    }
-       if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+        }
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             startActivity(new Intent(this, PhoneActivity.class));
             finish();
             return;
@@ -162,13 +153,13 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 FirebaseAuth.getInstance().signOut();
-                                startActivity(new  Intent(getApplicationContext(), PhoneActivity.class));
+                                startActivity(new Intent(getApplicationContext(), PhoneActivity.class));
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
-                }
+                    }
 
                 });
                 builder.create().show();
@@ -189,8 +180,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("TAG", "onActivityResult Main");
-        for (Fragment fragment : getSupportFragmentManager().getFragments()){
-            fragment.onActivityResult(requestCode, resultCode,data);
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            fragment.onActivityResult(requestCode, resultCode, data);
         }
         if (resultCode == RESULT_OK && requestCode == RequestCode) {
             String title = data.getStringExtra("title");
@@ -203,11 +194,11 @@ public class MainActivity extends AppCompatActivity {
         Prefs.getInstance(this).Clear();
         finish();
     }
-
-    @Override
-    public void onBackPressed() {
-        editText = findViewById(R.id.edit_text);
-        initFile(editText.getText().toString());
-        super.onBackPressed();
-    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        editText = findViewById(R.id.edit_text);
+//        initFile(editText.getText().toString());
+//        super.onBackPressed();
+//    }
 }
